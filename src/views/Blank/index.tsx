@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Text, Image, ScrollView} from 'react-native';
+import {Text, ScrollView} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import TextRecognition from 'react-native-text-recognition';
 import {Props} from './types';
-import Button from '../../common/ui/components/Button';
 import {
   Container,
   TextRecognized,
@@ -11,7 +10,9 @@ import {
   PreviewImage,
   PendingView,
   AppTitle,
+  ButtonContainer,
 } from './styles';
+import CameraButton from '../../common/ui/components/CameraButton';
 
 // Componente para mostrar una vista de carga mientras la cámara se inicializa
 const PendingViewComponent = () => (
@@ -95,10 +96,12 @@ export const Blank: Props = () => {
               return <PendingViewComponent />;
             }
             return (
-              <Button
-                title="Take Picture"
-                onPress={() => takePicture(camera)}
-              />
+              <ButtonContainer>
+                <CameraButton
+                  title="Take Picture"
+                  onPress={() => takePicture(camera)}
+                />
+              </ButtonContainer>
             );
           }}
         </Camera>
