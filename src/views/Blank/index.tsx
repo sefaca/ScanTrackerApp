@@ -23,42 +23,37 @@ const PendingViewComponent = () => (
 
 // Función para encontrar el número más grande en el texto reconocido
 const findTotalWithCurrencySymbol = text => {
-  // Buscar todas las líneas que contengan números y el símbolo "€" o palabras clave
-  const lines = text.split('\n');
-  const totalKeywords = [
-    'total',
-    'a pagar',
-    'importe',
-    'saldo',
-    'monto',
-    'total iva',
-    'importe total',
-    'total factura',
-  ];
-  const numberWithCurrencyRegex = /(\d+[\.,]?\d{0,2})\s*€/;
+  // Expresión regular para buscar números con coma y exactamente dos decimales
+  const numberWithCommaRegex = /\b\d+,\d{2}\b/;
 
-  for (const line of lines) {
-    // Buscar en cada línea los números precedidos o seguidos por el símbolo "€"
-    const numberMatch = line.match(numberWithCurrencyRegex);
-    if (numberMatch) {
-      return parseFloat(numberMatch[1].replace(',', '.')).toFixed(2);
-    }
-    // Buscar en cada línea los números precedidos por palabras clave
-    for (const keyword of totalKeywords) {
-      if (line.toLowerCase().includes(keyword)) {
-        const numberMatch = line.match(/(\d+[\.,]?\d{0,2})/);
-        if (numberMatch) {
-          return parseFloat(numberMatch[1].replace(',', '.')).toFixed(2);
+  // Inicializar variable para almacenar el número más grande encontrado
+  let maxNumber = 0;
+
+  // Separar el texto en líneas y buscar el número más grande que coincida con el formato
+  const lines = text.split('\n');
+  lines.forEach(line => {
+    const matches = line.match(numberWithCommaRegex);
+    if (matches) {
+      matches.forEach(match => {
+        const cleanedNumber = match.replace(',', '.').replace('O', '0'); // Reemplazar 'O' con '0' y la coma con un punto
+        const number = parseFloat(cleanedNumber);
+        if (number > maxNumber) {
+          maxNumber = number;
         }
-      }
+      });
     }
-  }
-  return 'No se reconoce el total';
+  });
+
+  // Formatear el número más grande encontrado con dos decimales
+  const formattedTotal = maxNumber.toFixed(2);
+
+  // Si se encontró algún número válido, devolverlo; de lo contrario, indicar que no se reconoce el total
+  return maxNumber > 0 ? formattedTotal : 'No se reconoce el total';
 };
 
 export const Blank: Props = () => {
   const [imageUri, setImageUri] = useState(null);
-  const [recognizedText, setRecognizedText] = useState('');
+  // const [recognizedText, setRecognizedText] = useState('');
   const [total, setTotal] = useState('');
 
   // Función para tomar una foto usando la cámara
@@ -71,6 +66,7 @@ export const Blank: Props = () => {
     const text = await TextRecognition.recognize(data.uri);
     const recognizedText = text.join('\n');
     setRecognizedText(recognizedText);
+    console.log('Texto reconocido:', recognizedText); // Aquí se agrega el console.log
 
     // Encontrar el número más grande en el texto reconocido
     const total = findTotalWithCurrencySymbol(recognizedText);
@@ -106,11 +102,11 @@ export const Blank: Props = () => {
           }}
         </Camera>
         {imageUri && <PreviewImage source={{uri: imageUri}} />}
-        <TextRecognized>
+        {/* <TextRecognized>
           {recognizedText
-            ? `Recognized Text: ${recognizedText}`
+            ? `Recognized Text:\n${recognizedText}`
             : 'No se reconoce ningún texto'}
-        </TextRecognized>
+        </TextRecognized> */}
         <TextRecognized>
           {total ? `Total: ${total}` : 'No se reconoce el total'}
         </TextRecognized>

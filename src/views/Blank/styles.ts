@@ -12,14 +12,13 @@ export const AppTitle = styled(Text).attrs({
 })`
   color: ${({theme}) => theme.colors.tealGreen};
   margin-top: 60px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center;
   font-weight: bold;
 `;
 
 export const TextRecognized = styled.Text`
   top: 140px;
-  margin-top: 20px;
   font-size: 18px;
   color: ${({theme}) => theme.colors.red};
   text-align: center;
@@ -28,7 +27,7 @@ export const TextRecognized = styled.Text`
 export const Camera = styled(RNCamera)`
   width: 100%;
   height: 30%;
-  margin-top: 130px;
+  margin-top: 100px;
 `;
 
 export const PreviewImage = styled.Image`
@@ -36,7 +35,6 @@ export const PreviewImage = styled.Image`
   height: 75px;
   align-self: left;
   margin-left: 50px;
-  margin-top: 15px;
   border-radius: 10px;
 `;
 
