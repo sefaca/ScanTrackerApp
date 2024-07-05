@@ -18,7 +18,8 @@ export const AppTitle = styled(Text).attrs({
 `;
 
 export const TextRecognized = styled.Text`
-  margin-top: 10px;
+  top: 140px;
+  margin-top: 20px;
   font-size: 18px;
   color: ${({theme}) => theme.colors.red};
   text-align: center;
@@ -27,17 +28,27 @@ export const TextRecognized = styled.Text`
 export const Camera = styled(RNCamera)`
   width: 100%;
   height: 30%;
+  margin-top: 130px;
 `;
 
 export const PreviewImage = styled.Image`
-  width: 200px;
-  height: 200px;
-  align-self: center;
-  margin: 10px;
+  width: 75px;
+  height: 75px;
+  align-self: left;
+  margin-left: 50px;
+  margin-top: 15px;
+  border-radius: 10px;
 `;
 
 export const PendingView = styled.View`
   flex: 1;
   justify-content: center;
+  align-items: center;
+`;
+
+export const ButtonContainer = styled.View`
+  position: absolute;
+  top: 320px;
+  width: 100%;
   align-items: center;
 `;
