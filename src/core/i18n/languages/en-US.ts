@@ -6,6 +6,8 @@ const tabs: Record<keyof RootTabParamList, string> = {
   Episode: 'Episode',
   Location: 'Location',
   Blank: 'Blank',
+  CameraScreen: 'CameraScreen',
+  DataScreen: 'DataScreen',
 };
 
 const actions = {

@@ -16,6 +16,7 @@ import {
 } from './styles';
 import CameraButton from '../../common/ui/components/CameraButton';
 import Button from '../../common/ui/components/Button';
+import {useNavigation} from '@react-navigation/native';
 
 // Componente para mostrar una vista de carga mientras la cámara se inicializa
 const PendingViewComponent = () => (
@@ -51,13 +52,19 @@ const findTotalWithCurrencySymbol = text => {
   const formattedTotal = maxNumber.toFixed(2);
 
   // Si se encontró algún número válido, devolverlo; de lo contrario, indicar que no se reconoce el total
-  return maxNumber > 0 ? formattedTotal : 'No se reconoce el total';
+  return maxNumber > 0 ? formattedTotal : 'The total is not recognized';
 };
 
 export const Blank: Props = () => {
   const [imageUri, setImageUri] = useState(null);
   const [recognizedText, setRecognizedText] = useState('');
   const [total, setTotal] = useState('');
+
+  const [expenses1, setExpenses1] = useState([]);
+  const [expenses2, setExpenses2] = useState([]);
+  const [expenses3, setExpenses3] = useState([]);
+
+  const navigation = useNavigation(); // Usa useNavigation
 
   // Función para tomar una foto usando la cámara
   const takePicture = async camera => {
@@ -112,12 +119,46 @@ export const Blank: Props = () => {
             : 'No se reconoce ningún texto'}
         </TextRecognized> */}
           <TextRecognized>
-            {total ? `Total: ${total}` : 'No se reconoce el total'}
+            {total ? `Total: ${total}` : 'The total is not recognized'}
           </TextRecognized>
           <ButtonContainer>
-            <Button title="Button1" />
-            <Button title="Button2" />
-            <Button title="Button3" />
+            <Button
+              title="Food"
+              onPress={() =>
+                setExpenses1([
+                  ...expenses1,
+                  {label: 'Expense', value: parseFloat(total)},
+                ])
+              }
+            />
+            <Button
+              title="Entertainment"
+              onPress={() =>
+                setExpenses2([
+                  ...expenses2,
+                  {label: 'Expense', value: parseFloat(total)},
+                ])
+              }
+            />
+            <Button
+              title="Transport"
+              onPress={() =>
+                setExpenses3([
+                  ...expenses3,
+                  {label: 'Expense', value: parseFloat(total)},
+                ])
+              }
+            />
+            <Button
+              title="See Charts"
+              onPress={() =>
+                navigation.navigate('DataScreen', {
+                  expenses1,
+                  expenses2,
+                  expenses3,
+                })
+              }
+            />
           </ButtonContainer>
         </TextContainer>
       </Container>
