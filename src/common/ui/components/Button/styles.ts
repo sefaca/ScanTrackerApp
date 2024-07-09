@@ -3,10 +3,10 @@ import Text from '../../components/Text';
 import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
-  background-color: ${({theme}) => theme.colors.red};
+  background-color: ${({theme}) => theme.colors.buttonBeige};
   border-width: 2px;
-  border-color: ${({theme}) => theme.colors.tealGreen};
-  width: 50%;
+  border-color: ${({theme}) => theme.colors.brown};
+  width: 25%;
   height: 45px;
   border-radius: 16px;
   margin: 5px;
@@ -15,12 +15,12 @@ export const Container = styled.View`
 export const Pressable = styled(RectButton)`
   align-items: center;
   border-radius: 16px;
-  height: 40px;
+  height: 45px;
   justify-content: center;
 `;
 
 export const Title = styled(Text).attrs({
   variant: 'body17-semibold',
 })`
-  color: ${({theme}) => theme.colors.white};
+  color: ${({theme}) => theme.colors.mediumBrown};
 `;

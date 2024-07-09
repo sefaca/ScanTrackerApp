@@ -11,8 +11,11 @@ import {
   PendingView,
   AppTitle,
   ButtonContainer,
+  TextContainer,
+  ButtonCameraContainer,
 } from './styles';
 import CameraButton from '../../common/ui/components/CameraButton';
+import Button from '../../common/ui/components/Button';
 
 // Componente para mostrar una vista de carga mientras la cámara se inicializa
 const PendingViewComponent = () => (
@@ -53,7 +56,7 @@ const findTotalWithCurrencySymbol = text => {
 
 export const Blank: Props = () => {
   const [imageUri, setImageUri] = useState(null);
-  // const [recognizedText, setRecognizedText] = useState('');
+  const [recognizedText, setRecognizedText] = useState('');
   const [total, setTotal] = useState('');
 
   // Función para tomar una foto usando la cámara
@@ -92,24 +95,31 @@ export const Blank: Props = () => {
               return <PendingViewComponent />;
             }
             return (
-              <ButtonContainer>
+              <ButtonCameraContainer>
                 <CameraButton
                   title="Take Picture"
                   onPress={() => takePicture(camera)}
                 />
-              </ButtonContainer>
+              </ButtonCameraContainer>
             );
           }}
         </Camera>
-        {imageUri && <PreviewImage source={{uri: imageUri}} />}
-        {/* <TextRecognized>
+        <TextContainer>
+          {imageUri && <PreviewImage source={{uri: imageUri}} />}
+          {/* <TextRecognized>
           {recognizedText
             ? `Recognized Text:\n${recognizedText}`
             : 'No se reconoce ningún texto'}
         </TextRecognized> */}
-        <TextRecognized>
-          {total ? `Total: ${total}` : 'No se reconoce el total'}
-        </TextRecognized>
+          <TextRecognized>
+            {total ? `Total: ${total}` : 'No se reconoce el total'}
+          </TextRecognized>
+          <ButtonContainer>
+            <Button title="Button1" />
+            <Button title="Button2" />
+            <Button title="Button3" />
+          </ButtonContainer>
+        </TextContainer>
       </Container>
     </ScrollView>
   );

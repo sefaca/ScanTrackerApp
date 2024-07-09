@@ -8,4 +8,10 @@ export const colors = {
   white: '#FFFFFF',
   gray: '#C7C7CC',
   transparent: 'rgba(0, 0, 0, 0)',
+  beige: '#d5b990',
+  mediumBeige: '#ece2d4',
+  lightBeige: '#f8f2eb',
+  buttonBeige: '#d5b990',
+  brown: '#291f0f',
+  mediumBrown: '#372a15',
 };
