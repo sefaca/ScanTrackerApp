@@ -16,6 +16,8 @@ export type RootParamsList = {
   BlankAuth: undefined;
   Tabs: undefined;
   Blank: undefined;
+  CameraScreen: undefined;
+  DataScreen: undefined;
 };
 
 export type ScreensParamsList = RootParamsList & RootTabParamList;
