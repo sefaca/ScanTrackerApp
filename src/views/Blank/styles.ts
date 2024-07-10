@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
+import {StyleSheet} from 'react-native';
 import Text from '../../common/ui/components/Text';
 import {RNCamera} from 'react-native-camera';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.colors.beige};
+  background-color: ${({theme}) => theme.colors.mediumBeige};
 `;
 
 export const TextContainer = styled.View`
@@ -68,3 +69,33 @@ export const ButtonContainer = styled.View`
   margin-top: 65px;
   position: absolute;
 `;
+
+export const OtherExpense = styled.View``;
+
+export const OtherText = styled.Text`
+  font-size: 18px;
+  color: ${({theme}) => theme.colors.mediumBrown};
+  align-self: start;
+  margin-top: 130px;
+  margin-left: 20px;
+`;
+
+export const InputContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: auto;
+  align-items: center;
+  margin: 20px;
+  margin-top: 7px;
+`;
+
+export const styles = StyleSheet.create({
+  textInput: {
+    width: '73%',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+});

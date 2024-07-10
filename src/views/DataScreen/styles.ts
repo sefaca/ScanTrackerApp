@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
+import {DefaultTheme} from 'styled-components';
 
 export const styles = StyleSheet.create({
   chartStyle: {
@@ -7,6 +8,14 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
   },
 });
+
+export const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+`;
 
 export const chartConfig = {
   backgroundGradientFrom: '#ffffff',
@@ -25,26 +34,30 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({theme}) => theme.colors.beige};
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-left: 10px;
+  color: ${({theme}) => theme.colors.brown};
 `;
 
 export const CharTitle = styled.Text`
   font-size: 18px;
   font-weight: bold;
+  margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
+  color: ${({theme}) => theme.colors.brown};
 `;
 
 export const ChartContainer = styled.View`
-  margin-bottom: 30px;
   align-items: center;
+  margin-bottom: 5px;
 `;
 
 export const ChartBox = styled.View`
@@ -52,7 +65,7 @@ export const ChartBox = styled.View`
   border-width: 1px;
   border-color: ${({theme}) => theme.colors.mediumBrown};
   border-radius: 10px;
-  padding: 10px;
+  margin-bottom: 20px;
 `;
 
 export const NoDataText = styled.Text`
@@ -62,8 +75,9 @@ export const NoDataText = styled.Text`
 `;
 
 export const SummaryContainer = styled.View`
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   align-items: center;
+  width: 100%;
 `;
 
 export const HistoryContainer = styled.View`
@@ -73,24 +87,53 @@ export const HistoryContainer = styled.View`
 
 export const HistoryHeader = styled.View`
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   border-bottom-width: 1px;
   border-bottom-color: #ddd;
   padding-bottom: 5px;
   margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 
 export const HistoryHeaderText = styled.Text`
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
+  flex: 1;
 `;
 
 export const HistoryRow = styled.View`
   flex-direction: row;
-  justify-content: space-around;
-  padding-top: 5px;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 
 export const HistoryText = styled.Text`
   font-size: 16px;
+  padding: 5px;
+  text-align: center;
+  flex: 1;
 `;
+
+export const HistoryCategory = styled.Text`
+  font-size: 16px;
+  padding: 5px;
+  text-align: center;
+  flex: 1;
+`;
+
+export const HistoryValue = styled.Text`
+  font-size: 16px;
+  padding: 5px;
+  text-align: center;
+  flex: 1;
+`;
+
+export const getThemeColors = (theme: DefaultTheme) => ({
+  food: theme.colors.chocolate,
+  entertainment: theme.colors.sandyBrown,
+  transport: theme.colors.tan,
+  other: theme.colors.sienna,
+});
