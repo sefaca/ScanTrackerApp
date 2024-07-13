@@ -1,26 +1,41 @@
+# ExpenseTracker
+
+ExpenseTracker is a React Native application designed to help you keep track of your expenses effortlessly. The app allows you to scan receipts, recognize text, and calculate the total amount spent.
+
+# Features
+
+- Scan receipts using your device camera
+- Recognize and extract text from receipts
+- Automatically calculate and display the total expense
+- Supports multiple languages (English and Spanish)
+
+# Demo Video
+
+Watch the demo video to see ExpenseTracker in action:
+
+https://github.com/user-attachments/assets/4546e66e-727d-478b-bc8d-1a83e598b906
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-## Step 1: Start the Metro Server
+## Installation
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/your-username/ScanTrackerApp.git
+    ```
+2. Install dependencies:
+    ```sh
+    cd ScanTrackerApp
+    npm install
+    ```
+3. Run the app:
+    ```sh
+    npm start
+    ```
 
 ### For Android
 
@@ -59,10 +74,28 @@ Now that you have successfully run the app, let's modify it.
 
 You've successfully run and modified your React Native App. :partying_face:
 
-### Now what?
+## Usage
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- Open the app and take a picture of your receipt.
+- The app will recognize and extract the text from the receipt.
+- Select the category in which you want to store the expense.
+- Navigate to the charting screen via the right click on a graph to view your expense analysis.
+
+## Contributing
+
+- Fork the repository
+- Create your feature branch (git checkout -b feature/new-feature)
+- Commit your changes (git commit -m 'Add some feature')
+- Push to the branch (git push origin feature/new-feature)
+- Open a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+- React Native
+- TextRecognition API
 
 # Troubleshooting
 
