@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, ScrollView} from 'react-native';
+import {Text, ScrollView, TextInput, Alert} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import TextRecognition from 'react-native-text-recognition';
 import {Props} from './types';
@@ -13,10 +13,18 @@ import {
   ButtonContainer,
   TextContainer,
   ButtonCameraContainer,
+  InputContainer,
+  styles,
+  OtherExpense,
+  OtherText, // Importa los estilos aquí
 } from './styles';
 import CameraButton from '../../common/ui/components/CameraButton';
-import Button from '../../common/ui/components/Button';
 import {useNavigation} from '@react-navigation/native';
+import FoodButton from '../../common/ui/components/FoodButton';
+import EntertainmentButton from '../../common/ui/components/EntertainmentButton';
+import TransportButton from '../../common/ui/components/TransportButton';
+import ChartButton from '../../common/ui/components/ChartButton';
+import AddButton from '../../common/ui/components/AddButton';
 
 // Componente para mostrar una vista de carga mientras la cámara se inicializa
 const PendingViewComponent = () => (
@@ -59,10 +67,12 @@ export const Blank: Props = () => {
   const [imageUri, setImageUri] = useState(null);
   const [recognizedText, setRecognizedText] = useState('');
   const [total, setTotal] = useState('');
+  const [manualExpense, setManualExpense] = useState('');
 
   const [expenses1, setExpenses1] = useState([]);
   const [expenses2, setExpenses2] = useState([]);
   const [expenses3, setExpenses3] = useState([]);
+  const [otherExpenses, setOtherExpenses] = useState([]);
 
   const navigation = useNavigation(); // Usa useNavigation
 
@@ -81,6 +91,35 @@ export const Blank: Props = () => {
     // Encontrar el número más grande en el texto reconocido
     const total = findTotalWithCurrencySymbol(recognizedText);
     setTotal(total);
+  };
+
+  const handleAddManualExpense = () => {
+    const expense = parseFloat(manualExpense.replace(',', '.'));
+    if (!isNaN(expense) && /^(\d+(\.\d{1,2})?)$/.test(manualExpense)) {
+      const newExpense = {
+        label: 'Other',
+        value: expense,
+        date: new Date(),
+        category: 'Other',
+      };
+      setOtherExpenses([...otherExpenses, newExpense]);
+      setManualExpense('');
+    } else {
+      Alert.alert(
+        'Invalid input',
+        'Please enter a valid number with two decimal places',
+      );
+    }
+  };
+
+  const addExpense = (setExpenses, category) => {
+    const expense = {
+      label: 'Expense',
+      value: parseFloat(total),
+      date: new Date(),
+      category,
+    };
+    setExpenses(prevExpenses => [...prevExpenses, expense]);
   };
 
   return (
@@ -113,54 +152,48 @@ export const Blank: Props = () => {
         </Camera>
         <TextContainer>
           {imageUri && <PreviewImage source={{uri: imageUri}} />}
-          {/* <TextRecognized>
-          {recognizedText
-            ? `Recognized Text:\n${recognizedText}`
-            : 'No se reconoce ningún texto'}
-        </TextRecognized> */}
           <TextRecognized>
             {total ? `Total: ${total}` : 'The total is not recognized'}
           </TextRecognized>
           <ButtonContainer>
-            <Button
+            <FoodButton
               title="Food"
-              onPress={() =>
-                setExpenses1([
-                  ...expenses1,
-                  {label: 'Expense', value: parseFloat(total)},
-                ])
-              }
+              onPress={() => addExpense(setExpenses1, 'Food')}
             />
-            <Button
+            <EntertainmentButton
               title="Entertainment"
-              onPress={() =>
-                setExpenses2([
-                  ...expenses2,
-                  {label: 'Expense', value: parseFloat(total)},
-                ])
-              }
+              onPress={() => addExpense(setExpenses2, 'Entertainment')}
             />
-            <Button
+            <TransportButton
               title="Transport"
-              onPress={() =>
-                setExpenses3([
-                  ...expenses3,
-                  {label: 'Expense', value: parseFloat(total)},
-                ])
-              }
+              onPress={() => addExpense(setExpenses3, 'Transport')}
             />
-            <Button
+            <ChartButton
               title="See Charts"
               onPress={() =>
                 navigation.navigate('DataScreen', {
                   expenses1,
                   expenses2,
                   expenses3,
+                  otherExpenses,
                 })
               }
             />
           </ButtonContainer>
         </TextContainer>
+        <OtherExpense>
+          <OtherText>Other expense:</OtherText>
+          <InputContainer>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter expense (e.g. 12.34)"
+              value={manualExpense}
+              onChangeText={setManualExpense}
+              keyboardType="numeric"
+            />
+            <AddButton title="Add Expense" onPress={handleAddManualExpense} />
+          </InputContainer>
+        </OtherExpense>
       </Container>
     </ScrollView>
   );

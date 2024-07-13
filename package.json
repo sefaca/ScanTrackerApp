@@ -18,7 +18,9 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.29",
     "@storybook/react-native": "^7.6.20",
+    "add": "^2.0.6",
     "apollo3-cache-persist": "^0.15.0",
+    "chart": "^0.1.2",
     "graphql": "^16.9.0",
     "i18next": "^23.11.5",
     "intl-pluralrules": "^2.0.1",
@@ -39,6 +41,7 @@
     "react-native-text-recognition": "^1.0.2",
     "react-native-vector-icons": "^10.1.0",
     "react-navigation": "^5.0.0",
+    "shadcn-ui": "^0.8.0",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
